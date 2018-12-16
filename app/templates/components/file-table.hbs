@@ -1,0 +1,21 @@
+
+<header data-test-id="file-table-action-bar">
+  <label data-test-action="file-table-select-all"></label>
+  <button data-test-action="file-table-download-selected">Download Selected</button>
+</header>
+
+<table>
+  <thead data-test-id="file-table-header">
+    <th>&nbsp;</th>
+    <th>Name</th>
+    <th>Device</th>
+    <th>Path</th>
+    <th>&nbsp;</th>
+    <th>Status</th>
+  </thead>
+  <tbody>
+    {{#each files as | file |}}
+      {{file-table-item file=file selected=selected}}
+    {{/each}}
+  </tbody>
+</table>
