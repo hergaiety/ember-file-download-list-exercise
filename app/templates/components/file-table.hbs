@@ -15,7 +15,10 @@
   </thead>
   <tbody>
     {{#each files as | file |}}
-      {{file-table-item file=file selectedFilePaths=selectedFilePaths}}
+      {{file-table-item
+        file=file
+        selectedFilePaths=selectedFilePaths
+      }}
     {{/each}}
   </tbody>
 </table>
