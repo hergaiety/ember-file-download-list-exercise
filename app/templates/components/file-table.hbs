@@ -3,6 +3,12 @@
     data-test-action="file-table-select-all"
     {{action "toggleSelectAll"}}
   >
+    <i
+      class="file-table-select-status-{{selectAllStatus}}"
+      data-test-id="file-table-select-status-icon"
+    >
+      &nbsp;
+    </i>
     Selected {{selectedFilePaths.length}}
   </button>
   <button data-test-action="file-table-download-selected">Download Selected</button>

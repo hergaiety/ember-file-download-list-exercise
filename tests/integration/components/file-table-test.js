@@ -74,4 +74,17 @@ module('Integration | Component | file-table', function(hooks) {
     await click('[data-test-action=file-table-select-all]');
     assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected ' + this.files.length);
   });
+
+  test('select all checkbox changes appearance between some, all and none', async function(assert) {
+    this.set('files', [genericFile(), genericFile()]);
+    this.set('selectedFilePaths', [this.files[0].path]);
+    await render(hbs`{{file-table files=files selectedFilePaths=selectedFilePaths}}`);
+    assert.equal(find('[data-test-id=file-table-select-status-icon]').classList.contains('file-table-select-status-some'), true, 'Shows SOME checkbox status icon');
+
+    await click('[data-test-action=file-table-select-all]');
+    assert.equal(find('[data-test-id=file-table-select-status-icon]').classList.contains('file-table-select-status-all'), true, 'Shows ALL checkbox status icon');
+
+    await click('[data-test-action=file-table-select-all]');
+    assert.equal(find('[data-test-id=file-table-select-status-icon]').classList.contains('file-table-select-status-none'), true, 'Shows NONE checkbox status icon');
+  });
 });

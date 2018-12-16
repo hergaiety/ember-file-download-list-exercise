@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { set } from '@ember/object';
+import { set, computed } from '@ember/object';
 
 const defaultFiles = [];
 const defaultSelectedFilePaths = [];
@@ -7,6 +7,11 @@ const defaultSelectedFilePaths = [];
 export default Component.extend({
   files: defaultFiles,
   selectedFilePaths: defaultSelectedFilePaths,
+  selectAllStatus: computed('selectedFilePaths.[]', 'files.[]', function() {
+    if (this.selectedFilePaths.length === this.files.length) {
+      return 'all';
+    } else return this.selectedFilePaths.length === 0 ? 'none' : 'some';
+  }),
 
   actions: {
     toggleSelectAll() {
