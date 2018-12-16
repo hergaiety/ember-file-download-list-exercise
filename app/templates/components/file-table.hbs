@@ -24,11 +24,12 @@
     {{action "toggleSelectAll"}}
   >
     <i
-      class="file-table-select-status-{{selectAllStatus}}"
+      class="faux-checkbox -{{selectAllStatus}}"
       data-test-id="file-table-select-status-icon"
     >
       &nbsp;
     </i>
+
     Selected {{selectedFilePaths.length}}
   </button>
   <button

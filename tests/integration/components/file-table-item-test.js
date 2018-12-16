@@ -50,12 +50,12 @@ module('Integration | Component | file-table-item', function(hooks) {
     this.set('selectedFilePaths', []);
     await render(hbs`{{file-table-item file=file selectedFilePaths=selectedFilePaths}}`);
 
-    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), '', 'Not selected by default');
+    assert.equal(find('[data-test-id=file-table-item-selected-icon]').classList.contains('-off'), true, 'Not selected by default');
 
     this.set('selectedFilePaths', [this.file.path]);
-    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), 'Selected', 'Not selected by default');
+    assert.equal(find('[data-test-id=file-table-item-selected-icon]').classList.contains('-on'), true, 'Not selected by default');
 
     this.set('selectedFilePaths', []);
-    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), '', 'No longer selected');
+    assert.equal(find('[data-test-id=file-table-item-selected-icon]').classList.contains('-off'), true, 'No longer selected');
   });
 });

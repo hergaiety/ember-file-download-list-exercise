@@ -38,15 +38,15 @@ module('Integration | Component | file-table', function(hooks) {
     this.set('files', [genericFile(), genericFile()]);
     await render(hbs`{{file-table files=files}}`);
     assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected 0');
-    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), '', 'Not selected by default');
+    assert.equal(find('[data-test-id=file-table-item]').classList.contains('is-selected'), false, 'Not selected by default');
 
     await click('[data-test-action=file-table-item-toggle]');
     assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected 1');
-    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), 'Selected', 'Selected after click');
+    assert.equal(find('[data-test-id=file-table-item]').classList.contains('is-selected'), true, 'Selected after click');
 
     await click('[data-test-action=file-table-item-toggle]');
     assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected 0');
-    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), '', 'Unselected after second click');
+    assert.equal(find('[data-test-id=file-table-item]').classList.contains('is-selected'), false, 'Unselected after second click');
   });
 
   test('select all, with none selected', async function(assert) {
@@ -79,13 +79,13 @@ module('Integration | Component | file-table', function(hooks) {
     this.set('files', [genericFile(), genericFile()]);
     this.set('selectedFilePaths', [this.files[0].path]);
     await render(hbs`{{file-table files=files selectedFilePaths=selectedFilePaths}}`);
-    assert.equal(find('[data-test-id=file-table-select-status-icon]').classList.contains('file-table-select-status-some'), true, 'Shows SOME checkbox status icon');
+    assert.equal(find('[data-test-id=file-table-select-status-icon]').classList.contains('-some'), true, 'Shows SOME checkbox status icon');
 
     await click('[data-test-action=file-table-select-all]');
-    assert.equal(find('[data-test-id=file-table-select-status-icon]').classList.contains('file-table-select-status-all'), true, 'Shows ALL checkbox status icon');
+    assert.equal(find('[data-test-id=file-table-select-status-icon]').classList.contains('-on'), true, 'Shows ALL checkbox status icon');
 
     await click('[data-test-action=file-table-select-all]');
-    assert.equal(find('[data-test-id=file-table-select-status-icon]').classList.contains('file-table-select-status-none'), true, 'Shows NONE checkbox status icon');
+    assert.equal(find('[data-test-id=file-table-select-status-icon]').classList.contains('-off'), true, 'Shows NONE checkbox status icon');
   });
 
   test('it handles showing download device/path for selected available files', async function(assert) {

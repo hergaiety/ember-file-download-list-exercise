@@ -19,4 +19,8 @@ export default Component.extend({
   isSelected: computed('file.path', 'selectedFilePaths.[]', function() {
     return this.selectedFilePaths.includes(this.file.path);
   }),
+
+  checkboxClass: computed('isSelected', function() {
+    return this.isSelected ? 'on' : 'off';
+  }),
 });

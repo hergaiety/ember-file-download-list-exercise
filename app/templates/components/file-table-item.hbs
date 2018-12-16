@@ -1,5 +1,10 @@
 <td data-test-id="file-table-item-selected">
-  {{if isSelected "Selected"}}
+  <i
+    class="faux-checkbox -{{checkboxClass}}"
+    data-test-id="file-table-item-selected-icon"
+  >
+    &nbsp;
+  </i>
 </td>
 <td data-test-id="file-table-item-name">
   {{file.name}}

@@ -11,8 +11,8 @@ export default Component.extend({
 
   selectAllStatus: computed('selectedFilePaths.[]', 'files.[]', function() {
     if (this.selectedFilePaths.length === this.files.length) {
-      return 'all';
-    } else return this.selectedFilePaths.length === 0 ? 'none' : 'some';
+      return 'on';
+    } else return this.selectedFilePaths.length === 0 ? 'off' : 'some';
   }),
 
   selectedFileDownloads: computed('selectedFilePaths.[]', 'files.@each.{status,path}', function() {
