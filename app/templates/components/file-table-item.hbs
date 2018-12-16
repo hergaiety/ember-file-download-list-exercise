@@ -12,12 +12,15 @@
 </td>
 <td>
   <i
-    class="file-table-item-status-{{file.status}}"
+    class="file-table-item-status-icon -{{file.status}}"
     data-test-id="file-table-status-icon"
   >
     &nbsp;
   </i>
 </td>
-<td data-test-id="file-table-item-status">
+<td
+  class="file-table-item-status"
+  data-test-id="file-table-item-status"
+>
   {{file.status}}
 </td>

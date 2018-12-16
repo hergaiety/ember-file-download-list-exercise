@@ -38,11 +38,11 @@ module('Integration | Component | file-table-item', function(hooks) {
     await render(hbs`{{file-table-item file=file}}`);
 
     assert.equal(find('[data-test-id=file-table-item-status]').textContent.trim(), 'scheduled', 'Renders correct status text');
-    assert.equal(find('[data-test-id=file-table-status-icon]').classList.contains('file-table-item-status-scheduled'), true, 'Status icon has expected class');
+    assert.equal(find('[data-test-id=file-table-status-icon]').classList.contains('-scheduled'), true, 'Status icon has expected class');
 
     this.set('file', genericFile());
     assert.equal(find('[data-test-id=file-table-item-status]').textContent.trim(), 'available', 'Renders correct status text');
-    assert.equal(find('[data-test-id=file-table-status-icon]').classList.contains('file-table-item-status-available'), true, 'Status icon has expected class');
+    assert.equal(find('[data-test-id=file-table-status-icon]').classList.contains('-available'), true, 'Status icon has expected class');
   });
 
   test('it handles toggling selected status based on incoming selectedFilePaths', async function(assert) {

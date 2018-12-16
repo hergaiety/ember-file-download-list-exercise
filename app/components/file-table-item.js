@@ -6,6 +6,8 @@ const defaultSelectedFilePaths = [];
 
 export default Component.extend({
   tagName: 'tr',
+  classNames: ['file-table-item'],
+  classNameBindings: ['isSelected'],
   attributeBindings: ['data-test-id', 'data-test-action'],
 
   'data-test-id': 'file-table-item',

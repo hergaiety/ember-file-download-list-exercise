@@ -19,6 +19,7 @@
 
 <header data-test-id="file-table-action-bar">
   <button
+    class="file-table-action"
     data-test-action="file-table-select-all"
     {{action "toggleSelectAll"}}
   >
@@ -31,6 +32,7 @@
     Selected {{selectedFilePaths.length}}
   </button>
   <button
+    class="file-table-action"
     data-test-action="file-table-download-selected"
     {{action "downloadSelected"}}
   >
@@ -38,14 +40,19 @@
   </button>
 </header>
 
-<table>
-  <thead data-test-id="file-table-header">
-    <th>&nbsp;</th>
-    <th>Name</th>
-    <th>Device</th>
-    <th>Path</th>
-    <th>&nbsp;</th>
-    <th>Status</th>
+<table class="file-table">
+  <thead
+    class="file-table-head"
+    data-test-id="file-table-header"
+  >
+    <tr>
+      <th>&nbsp;</th>
+      <th>Name</th>
+      <th>Device</th>
+      <th>Path</th>
+      <th>&nbsp;</th>
+      <th>Status</th>
+    </tr>
   </thead>
   <tbody>
     {{#each files as | file |}}

@@ -1,0 +1,69 @@
+body {
+  font-family: sans-serif;
+}
+
+.file-table-action {
+  font-size: 1.25em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: .5em;
+}
+
+.file-table {
+  width: 100%;
+  border: 1px solid #eee;
+  border-collapse: collapse;
+}
+
+.file-table-head tr {
+  border-bottom: 1px solid #eee;
+}
+
+.file-table-head th {
+  text-align: left;
+  font-weight: normal;
+  font-size: 1.1em;
+  padding: 1em 0 .5em;
+}
+
+.file-table-item:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+.file-table-item.is-selected {
+  background: #ddd;
+}
+
+
+.file-table-item:active {
+  background: #ccc;
+}
+
+.file-table-item > :first-child {
+  padding-left: .5em;
+}
+
+.file-table-item > :last-child {
+  padding-right: 3em;
+}
+
+.file-table-item td {
+  padding: .5em 0;
+}
+
+.file-table-item-status {
+  text-transform: capitalize;
+}
+
+.file-table-item-status-icon {
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-radius: 100%;
+}
+
+.file-table-item-status-icon.-available {
+  background: #77ce2d;
+}
