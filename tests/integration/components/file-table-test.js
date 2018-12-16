@@ -90,11 +90,15 @@ module('Integration | Component | file-table', function(hooks) {
 
   test('it handles showing download device/path for selected available files', async function(assert) {
     this.set('files', [genericFile(), genericFile()]);
+    this.set('files.1.status', 'scheduled');
     await render(hbs`{{file-table files=files}}`);
     await click('[data-test-action=file-table-select-all]');
     await click('[data-test-action=file-table-download-selected]');
 
     assert.ok(find('[data-test-id=file-table-download-alert]'), 'Renders download alert wrapper');
+    assert.equal(find('[data-test-id=file-table-download-alert]').innerText.includes(this.files[0].device), true, 'Renders first file device');
+    assert.equal(find('[data-test-id=file-table-download-alert]').innerText.includes(this.files[0].path), true, 'Renders first file path');
+    assert.equal(find('[data-test-id=file-table-download-alert]').innerText.includes(this.files[1].path), false, 'Does NOT render second file path');
 
     await click('[data-test-action=file-table-download-close]');
     assert.notOk(find('[data-test-id=file-table-download-alert]'), 'Closes download alert wrapper');

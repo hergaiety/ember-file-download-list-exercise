@@ -9,7 +9,11 @@
     >
       Close
     </button>
-    Foo
+    <ol>
+      {{#each selectedFileDownloads as | file |}}
+        <li><strong>{{file.device}}</strong>: <code>{{file.path}}</code></li>
+      {{/each}}
+    </ol>
   </div>
 {{/if}}
 

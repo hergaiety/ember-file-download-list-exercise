@@ -15,6 +15,12 @@ export default Component.extend({
     } else return this.selectedFilePaths.length === 0 ? 'none' : 'some';
   }),
 
+  selectedFileDownloads: computed('selectedFilePaths.[]', 'files.@each.{status,path}', function() {
+    return this.selectedFilePaths.map(path => {
+      return this.files.find(file => file.status === 'available' && file.path === path);
+    })
+  }),
+
   actions: {
     downloadSelected() {
       set(this, 'showDownloadAlert', true);
