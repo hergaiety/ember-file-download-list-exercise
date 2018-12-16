@@ -1,7 +1,10 @@
 <header data-test-id="file-table-action-bar">
-  <label data-test-action="file-table-select-all">
+  <button
+    data-test-action="file-table-select-all"
+    {{action "toggleSelectAll"}}
+  >
     Selected {{selectedFilePaths.length}}
-  </label>
+  </button>
   <button data-test-action="file-table-download-selected">Download Selected</button>
 </header>
 

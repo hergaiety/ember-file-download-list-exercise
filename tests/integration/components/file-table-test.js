@@ -3,11 +3,12 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, find, findAll, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
+const randomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 const genericFile = () => {
   return {
     name: 'foo.bar',
     device: 'Baz',
-    path: '~/foo.bar',
+    path: `~/foo{${randomNumber(1,9001)}.bar`,
     status: 'available',
   };
 };
@@ -46,5 +47,31 @@ module('Integration | Component | file-table', function(hooks) {
     await click('[data-test-action=file-table-item-toggle]');
     assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected 0');
     assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), '', 'Unselected after second click');
+  });
+
+  test('select all, with none selected', async function(assert) {
+    this.set('files', [genericFile(), genericFile()]);
+    await render(hbs`{{file-table files=files}}`);
+
+    await click('[data-test-action=file-table-select-all]');
+    assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected ' + this.files.length);
+  });
+
+  test('select all, with everything selected', async function(assert) {
+    this.set('files', [genericFile(), genericFile()]);
+    this.set('selectedFilePaths', this.files.map(file => file.path));
+    await render(hbs`{{file-table files=files selectedFilePaths=selectedFilePaths}}`);
+
+    await click('[data-test-action=file-table-select-all]');
+    assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected 0');
+  });
+
+  test('select all, with some selected', async function(assert) {
+    this.set('files', [genericFile(), genericFile()]);
+    this.set('selectedFilePaths', [this.files[0].path]);
+    await render(hbs`{{file-table files=files selectedFilePaths=selectedFilePaths}}`);
+
+    await click('[data-test-action=file-table-select-all]');
+    assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected ' + this.files.length);
   });
 });
