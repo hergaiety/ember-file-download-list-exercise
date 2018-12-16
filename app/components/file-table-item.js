@@ -5,10 +5,16 @@ const defaultFile = {};
 const defaultSelectedFilePaths = [];
 
 export default Component.extend({
+  tagName: 'tr',
+  attributeBindings: ['data-test-id', 'data-test-action'],
+
+  'data-test-id': 'file-table-item',
+  'data-test-action': 'file-table-item-toggle',
+
   file: defaultFile,
   selectedFilePaths: defaultSelectedFilePaths,
 
-  isSelected: computed('file.path', 'selectedFilePaths', function() {
+  isSelected: computed('file.path', 'selectedFilePaths.[]', function() {
     return this.selectedFilePaths.includes(this.file.path);
   }),
 });

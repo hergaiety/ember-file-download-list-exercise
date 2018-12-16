@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find, findAll } from '@ember/test-helpers';
+import { render, find, findAll, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 const genericFile = () => {
@@ -31,5 +31,20 @@ module('Integration | Component | file-table', function(hooks) {
     await render(hbs`{{file-table files=files}}`);
 
     assert.equal(findAll('[data-test-id=file-table-item]').length, 2, 'Found expected two rows');
+  });
+
+  test('it can select toggle a row with clicks', async function(assert) {
+    this.set('files', [genericFile(), genericFile()]);
+    await render(hbs`{{file-table files=files}}`);
+    assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected 0');
+    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), '', 'Not selected by default');
+
+    await click('[data-test-action=file-table-item-toggle]');
+    assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected 1');
+    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), 'Selected', 'Selected after click');
+
+    await click('[data-test-action=file-table-item-toggle]');
+    assert.equal(find('[data-test-action=file-table-select-all]').textContent.trim(), 'Selected 0');
+    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), '', 'Unselected after second click');
   });
 });

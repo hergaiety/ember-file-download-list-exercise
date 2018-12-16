@@ -1,25 +1,23 @@
-<tr data-test-id="file-table-item">
-  <td data-test-id="file-table-item-selected">
-    {{if isSelected "Selected"}}
-  </td>
-  <td data-test-id="file-table-item-name">
-    {{file.name}}
-  </td>
-  <td data-test-id="file-table-item-device">
-    {{file.device}}
-  </td>
-  <td data-test-id="file-table-item-path">
-    {{file.path}}
-  </td>
-  <td>
-    <i
-      class="file-table-item-status-{{file.status}}"
-      data-test-id="file-table-status-icon"
-    >
-      &nbsp;
-    </i>
-  </td>
-  <td data-test-id="file-table-item-status">
-    {{file.status}}
-  </td>
-</tr>
+<td data-test-id="file-table-item-selected">
+  {{if isSelected "Selected"}}
+</td>
+<td data-test-id="file-table-item-name">
+  {{file.name}}
+</td>
+<td data-test-id="file-table-item-device">
+  {{file.device}}
+</td>
+<td data-test-id="file-table-item-path">
+  {{file.path}}
+</td>
+<td>
+  <i
+    class="file-table-item-status-{{file.status}}"
+    data-test-id="file-table-status-icon"
+  >
+    &nbsp;
+  </i>
+</td>
+<td data-test-id="file-table-item-status">
+  {{file.status}}
+</td>
