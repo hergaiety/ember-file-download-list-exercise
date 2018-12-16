@@ -1,3 +1,18 @@
+{{#if showDownloadAlert}}
+  <div
+    class="file-table-download-alert"
+    data-test-id="file-table-download-alert"
+  >
+    <button
+      data-test-action="file-table-download-close"
+      {{action "closeDownloadAlert"}}
+    >
+      Close
+    </button>
+    Foo
+  </div>
+{{/if}}
+
 <header data-test-id="file-table-action-bar">
   <button
     data-test-action="file-table-select-all"
@@ -11,7 +26,12 @@
     </i>
     Selected {{selectedFilePaths.length}}
   </button>
-  <button data-test-action="file-table-download-selected">Download Selected</button>
+  <button
+    data-test-action="file-table-download-selected"
+    {{action "downloadSelected"}}
+  >
+    Download Selected
+  </button>
 </header>
 
 <table>

@@ -87,4 +87,16 @@ module('Integration | Component | file-table', function(hooks) {
     await click('[data-test-action=file-table-select-all]');
     assert.equal(find('[data-test-id=file-table-select-status-icon]').classList.contains('file-table-select-status-none'), true, 'Shows NONE checkbox status icon');
   });
+
+  test('it handles showing download device/path for selected available files', async function(assert) {
+    this.set('files', [genericFile(), genericFile()]);
+    await render(hbs`{{file-table files=files}}`);
+    await click('[data-test-action=file-table-select-all]');
+    await click('[data-test-action=file-table-download-selected]');
+
+    assert.ok(find('[data-test-id=file-table-download-alert]'), 'Renders download alert wrapper');
+
+    await click('[data-test-action=file-table-download-close]');
+    assert.notOk(find('[data-test-id=file-table-download-alert]'), 'Closes download alert wrapper');
+  });
 });

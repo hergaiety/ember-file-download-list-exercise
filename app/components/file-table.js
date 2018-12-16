@@ -7,6 +7,8 @@ const defaultSelectedFilePaths = [];
 export default Component.extend({
   files: defaultFiles,
   selectedFilePaths: defaultSelectedFilePaths,
+  showDownloadAlert: false,
+
   selectAllStatus: computed('selectedFilePaths.[]', 'files.[]', function() {
     if (this.selectedFilePaths.length === this.files.length) {
       return 'all';
@@ -14,6 +16,14 @@ export default Component.extend({
   }),
 
   actions: {
+    downloadSelected() {
+      set(this, 'showDownloadAlert', true);
+    },
+
+    closeDownloadAlert() {
+      set(this, 'showDownloadAlert', false);
+    },
+
     toggleSelectAll() {
       if (this.selectedFilePaths.length === this.files.length) {
         set(this, 'selectedFilePaths', defaultSelectedFilePaths);
@@ -21,6 +31,7 @@ export default Component.extend({
         set(this, 'selectedFilePaths', this.files.map(file => file.path));
       }
     },
+
     toggleSelectedPath(path) {
       if (!this.selectedFilePaths.includes(path)) {
         this.selectedFilePaths.pushObject(path);
