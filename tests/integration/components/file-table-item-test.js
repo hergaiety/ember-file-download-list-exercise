@@ -44,4 +44,18 @@ module('Integration | Component | file-table-item', function(hooks) {
     assert.equal(find('[data-test-id=file-table-item-status]').textContent.trim(), 'available', 'Renders correct status text');
     assert.equal(find('[data-test-id=file-table-status-icon]').classList.contains('file-table-item-status-available'), true, 'Status icon has expected class');
   });
+
+  test('it handles toggling selected status based on incoming selectedFilePaths', async function(assert) {
+    this.set('file', genericFile());
+    this.set('selectedFilePaths', []);
+    await render(hbs`{{file-table-item file=file selectedFilePaths=selectedFilePaths}}`);
+
+    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), '', 'Not selected by default');
+
+    this.set('selectedFilePaths', [this.file.path]);
+    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), 'Selected', 'Not selected by default');
+
+    this.set('selectedFilePaths', []);
+    assert.equal(find('[data-test-id=file-table-item-selected]').textContent.trim(), '', 'No longer selected');
+  });
 });
